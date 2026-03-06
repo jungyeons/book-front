@@ -1,0 +1,180 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 41 45% 95%;
+    --foreground: 22 44% 17%;
+    --card: 42 56% 98%;
+    --card-foreground: 22 44% 17%;
+    --popover: 42 56% 98%;
+    --popover-foreground: 22 44% 17%;
+    --primary: 229 32% 28%;
+    --primary-foreground: 40 35% 96%;
+    --secondary: 39 35% 88%;
+    --secondary-foreground: 25 35% 24%;
+    --muted: 40 26% 91%;
+    --muted-foreground: 25 21% 42%;
+    --accent: 40 42% 84%;
+    --accent-foreground: 24 42% 23%;
+    --destructive: 3 72% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 121 23% 41%;
+    --success-foreground: 0 0% 100%;
+    --warning: 40 72% 52%;
+    --warning-foreground: 24 88% 16%;
+    --info: 214 35% 48%;
+    --info-foreground: 0 0% 100%;
+    --border: 36 35% 78%;
+    --input: 36 35% 78%;
+    --ring: 229 32% 36%;
+    --radius: 0.8rem;
+
+    --sidebar-background: 26 34% 15%;
+    --sidebar-foreground: 40 25% 82%;
+    --sidebar-primary: 43 60% 62%;
+    --sidebar-primary-foreground: 28 42% 16%;
+    --sidebar-accent: 25 24% 21%;
+    --sidebar-accent-foreground: 40 50% 92%;
+    --sidebar-border: 24 24% 29%;
+    --sidebar-ring: 43 60% 62%;
+    --sidebar-muted: 34 18% 59%;
+  }
+
+  .dark {
+    --background: 28 22% 9%;
+    --foreground: 40 30% 92%;
+    --card: 28 22% 12%;
+    --card-foreground: 40 30% 92%;
+    --popover: 28 22% 12%;
+    --popover-foreground: 40 30% 92%;
+    --primary: 43 60% 62%;
+    --primary-foreground: 28 42% 16%;
+    --secondary: 27 20% 18%;
+    --secondary-foreground: 40 24% 90%;
+    --muted: 27 20% 16%;
+    --muted-foreground: 39 12% 68%;
+    --accent: 27 20% 18%;
+    --accent-foreground: 40 24% 90%;
+    --destructive: 3 70% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 121 23% 41%;
+    --success-foreground: 0 0% 100%;
+    --warning: 40 72% 52%;
+    --warning-foreground: 24 88% 16%;
+    --info: 214 35% 48%;
+    --info-foreground: 0 0% 100%;
+    --border: 27 18% 24%;
+    --input: 27 18% 24%;
+    --ring: 43 60% 62%;
+
+    --sidebar-background: 24 26% 11%;
+    --sidebar-foreground: 39 22% 79%;
+    --sidebar-primary: 43 60% 62%;
+    --sidebar-primary-foreground: 28 42% 16%;
+    --sidebar-accent: 24 20% 17%;
+    --sidebar-accent-foreground: 39 35% 90%;
+    --sidebar-border: 24 18% 24%;
+    --sidebar-ring: 43 60% 62%;
+    --sidebar-muted: 34 15% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at 6% 8%, rgba(209, 157, 56, 0.17) 0%, rgba(209, 157, 56, 0) 36%),
+      radial-gradient(circle at 94% 0%, rgba(53, 77, 129, 0.18) 0%, rgba(53, 77, 129, 0) 32%),
+      repeating-linear-gradient(
+        112deg,
+        rgba(88, 66, 43, 0.055) 0,
+        rgba(88, 66, 43, 0.055) 1px,
+        transparent 1px,
+        transparent 23px
+      );
+    background-size: auto, auto, 340px 340px;
+  }
+}
+
+@layer utilities {
+  .font-brand {
+    font-family: 'Noto Serif KR', serif;
+    letter-spacing: -0.012em;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.55s ease-out both;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.bukchon-shell {
+  position: relative;
+  background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(41 52% 93%) 100%);
+}
+
+.bukchon-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 0% 100%, rgba(66, 87, 133, 0.14) 0, rgba(66, 87, 133, 0) 35%),
+    radial-gradient(circle at 100% 100%, rgba(199, 159, 85, 0.18) 0, rgba(199, 159, 85, 0) 38%);
+}
+
+.bukchon-glow {
+  position: absolute;
+  right: -14rem;
+  top: -12rem;
+  height: 30rem;
+  width: 30rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(53, 77, 129, 0.24), rgba(53, 77, 129, 0));
+  filter: blur(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-in-up {
+    animation: none;
+  }
+}

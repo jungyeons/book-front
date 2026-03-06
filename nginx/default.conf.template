@@ -1,0 +1,76 @@
+server {
+    listen 80;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # Docker 내부 DNS (127.0.0.11) - 컨테이너 이름 및 EC2 IP 모두 리졸브 가능
+    resolver 127.0.0.11 ipv6=off valid=10s;
+
+    # Admin API proxy
+    location /admin/api/ {
+        set $admin_backend ${ADMIN_BACKEND_HOST}:${ADMIN_BACKEND_PORT};
+        proxy_pass http://$admin_backend;
+        proxy_hide_header WWW-Authenticate;
+        proxy_connect_timeout 3s;
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+    }
+
+    # Bookvillage API proxy
+    location /api/ {
+        set $bv_backend ${BV_BACKEND_HOST}:${BV_BACKEND_PORT};
+        proxy_pass http://$bv_backend;
+        proxy_hide_header WWW-Authenticate;
+        proxy_connect_timeout 3s;
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # Admin static assets (long cache)
+    location /admin/assets/ {
+        add_header Cache-Control "public, max-age=31536000, immutable" always;
+        try_files $uri =404;
+    }
+
+    # Admin app SPA fallback
+    location /admin/ {
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+        try_files $uri $uri/ /admin/index.html;
+    }
+
+    # /admin (슬래시 없음) redirect
+    location = /admin {
+        return 301 /admin/;
+    }
+
+    # Bookvillage static assets (long cache)
+    location /assets/ {
+        add_header Cache-Control "public, max-age=31536000, immutable" always;
+        try_files $uri =404;
+    }
+
+    # Bookvillage app SPA fallback
+    location / {
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0" always;
+        add_header Pragma "no-cache" always;
+        add_header Expires "0" always;
+        try_files $uri $uri/ /index.html;
+    }
+}

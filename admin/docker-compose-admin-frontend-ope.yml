@@ -1,0 +1,19 @@
+name: bookkeeper-front
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NGINX_ENV: prod
+    container_name: bookkeeper-frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-81}:80"
+    environment:
+      BACKEND_PROXY_HOST: "host.docker.internal"
+      BACKEND_PROXY_PORT: "${BACKEND_PROXY_PORT:-8081}"
+      NGINX_ENVSUBST_FILTER: "BACKEND_PROXY_HOST|BACKEND_PROXY_PORT"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
