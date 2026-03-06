@@ -284,31 +284,6 @@ export const api = {
     deleteFavoritePost: (postId) => request(`/mypage/favorite-posts/${postId}`, { method: "DELETE" }),
     deleteReview: (reviewId, csrfToken) => request(`/mypage/reviews/${reviewId}`, { method: "DELETE", headers: { "X-LAB-CSRF-TOKEN": csrfToken } }),
   },
-  admin: {
-    dashboard: () => request("/admin/dashboard"),
-    getBooks: () => request("/admin/books"),
-    createBook: (data) => request("/admin/books", { method: "POST", body: JSON.stringify(data) }),
-    updateBook: (id, data) => request(`/admin/books/${id}`, { method: "PUT", body: JSON.stringify(data) }),
-    deleteBook: (id) => request(`/admin/books/${id}`, { method: "DELETE" }),
-    getOrders: () => request("/admin/orders"),
-    updateOrderStatus: (orderId, status) => request(`/admin/orders/${orderId}/status`, { method: "PUT", body: JSON.stringify({ status }) }),
-    getUsers: () => request("/admin/users"),
-    updateUserStatus: (userId, status, role) => request(`/admin/users/${userId}/status`, { method: "PUT", body: JSON.stringify({ status, role }) }),
-    getCoupons: () => request("/admin/coupons"),
-    createCoupon: (data) => request("/admin/coupons", { method: "POST", body: JSON.stringify(data) }),
-    getCustomerService: () => request("/admin/customer-service"),
-    replyCustomerService: (inquiryId, answer) => request(`/admin/customer-service/${inquiryId}/reply`, { method: "POST", body: JSON.stringify({ answer }) }),
-    getLogs: () => request("/admin/logs"),
-    stock: (author, isbn) => {
-      const params = new URLSearchParams();
-      if (author) params.set("author", author);
-      if (isbn) params.set("isbn", isbn);
-      return request(`/admin/books/stock${params.toString() ? `?${params.toString()}` : ""}`);
-    },
-    inbound: (isbn, quantity) => request("/admin/books/inbound", { method: "POST", body: JSON.stringify({ isbn, quantity }) }),
-    updateStock: (id, stock) => request(`/admin/books/${id}/stock`, { method: "PUT", body: JSON.stringify({ stock }) }),
-    createNotice: (title, content) => request("/admin/notices", { method: "POST", body: JSON.stringify({ title, content }) }),
-  },
   labs: {
     requirements: () => request("/labs/requirements"),
     simulate: (reqId, input, metadata) => request(`/labs/${reqId}/simulate`, { method: "POST", body: JSON.stringify({ input, metadata }) }),

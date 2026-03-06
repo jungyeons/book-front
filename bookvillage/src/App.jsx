@@ -13,7 +13,6 @@ import Mypage from "./pages/Mypage";
 import MypageAccount from "./pages/MypageAccount";
 import MypageActivity from "./pages/MypageActivity";
 import MypageWallet from "./pages/MypageWallet";
-import Admin from "./pages/Admin";
 import CustomerService from "./pages/CustomerService";
 import CustomerInquiryList from "./pages/CustomerInquiryList";
 import CustomerInquiryDetail from "./pages/CustomerInquiryDetail";
@@ -68,7 +67,6 @@ export default function App() {
               <Route path="/board/new" element={<PrivateRoute><BoardWrite /></PrivateRoute>} />
               <Route path="/board/:postId" element={<PrivateRoute><BoardDetail /></PrivateRoute>} />
               <Route path="/board/:postId/edit" element={<PrivateRoute><BoardWrite /></PrivateRoute>} />
-              <Route path="/admin" element={<PrivateRoute><Admin /></PrivateRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
