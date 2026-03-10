@@ -19,6 +19,7 @@ import CustomerServicePage from "@/pages/CustomerService";
 import MonitoringPage from "@/pages/Monitoring";
 import CouponsPage from "@/pages/Coupons";
 import ReviewsPage from "@/pages/Reviews";
+import NoticesPage from "@/pages/Notices";
 import SettingsPage from "@/pages/Settings";
 import NotFound from "@/pages/NotFound";
 const queryClient = new QueryClient({
@@ -53,6 +54,7 @@ const App = () => (<QueryClientProvider client={queryClient}>
               <Route path="monitoring" element={<MonitoringPage />}/>
               <Route path="coupons" element={<CouponsPage />}/>
               <Route path="reviews" element={<ReviewsPage />}/>
+              <Route path="notices" element={<NoticesPage />}/>
               <Route path="settings" element={<SettingsPage />}/>
             </Route>
             <Route path="*" element={<NotFound />}/>
