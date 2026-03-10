@@ -187,7 +187,7 @@ export const api = {
     },
     like: (reviewId) => request(`/reviews/${reviewId}/like`, { method: "POST" }),
     report: (reviewId, reason) => request(`/reviews/${reviewId}/report`, { method: "POST", body: JSON.stringify({ reason }) }),
-    delete: (reviewId, csrfToken) => request(`/reviews/${reviewId}`, { method: "DELETE", headers: { "X-LAB-CSRF-TOKEN": csrfToken } }),
+    delete: (reviewId, csrfToken) => request(`/reviews/${reviewId}`, { method: "DELETE", headers: { "X-CSRF-TOKEN": csrfToken } }),
   },
   board: {
     list: (q, myOnly = false, sort = "latest", page = 0, size = 10) => {
@@ -282,7 +282,7 @@ export const api = {
       request(`/mypage/orders/${orderId}/exchange`, { method: "POST", body: JSON.stringify({ reason, proofFileName }) }),
     favoritePosts: (includePrivate = false) => request(`/mypage/favorite-posts?includePrivate=${includePrivate}`),
     deleteFavoritePost: (postId) => request(`/mypage/favorite-posts/${postId}`, { method: "DELETE" }),
-    deleteReview: (reviewId, csrfToken) => request(`/mypage/reviews/${reviewId}`, { method: "DELETE", headers: { "X-LAB-CSRF-TOKEN": csrfToken } }),
+    deleteReview: (reviewId, csrfToken) => request(`/mypage/reviews/${reviewId}`, { method: "DELETE", headers: { "X-CSRF-TOKEN": csrfToken } }),
   },
   labs: {
     requirements: () => request("/labs/requirements"),
