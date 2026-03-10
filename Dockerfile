@@ -2,7 +2,7 @@
 FROM node:20-alpine AS bv-builder
 WORKDIR /app
 ENV BROWSERSLIST_IGNORE_OLD_DATA=1
-ENV NODE_OPTIONS=--max-old-space-size=1024
+ENV NODE_OPTIONS=--max-old-space-size=512
 COPY bookvillage/package.json bookvillage/package-lock.json ./
 RUN npm ci
 COPY bookvillage/ .
@@ -12,7 +12,7 @@ RUN npm run build
 FROM node:20-alpine AS admin-builder
 WORKDIR /app
 ENV BROWSERSLIST_IGNORE_OLD_DATA=1
-ENV NODE_OPTIONS=--max-old-space-size=1024
+ENV NODE_OPTIONS=--max-old-space-size=512
 COPY admin/package.json admin/package-lock.json ./
 RUN npm ci
 COPY admin/ .
