@@ -1,6 +1,7 @@
 ﻿import { NavLink, useLocation } from 'react-router-dom';
 import {
   Activity,
+  Bell,
   LayoutDashboard,
   LifeBuoy,
   MessageSquare,
@@ -35,6 +36,7 @@ const menuItems = [
   { title: 'Monitoring', url: '/monitoring', icon: Activity },
   { title: 'Coupons', url: '/coupons', icon: Ticket },
   { title: 'Reviews', url: '/reviews', icon: MessageSquare },
+  { title: 'Notices', url: '/notices', icon: Bell },
   { title: 'Settings', url: '/settings', icon: Settings },
 ];
 
