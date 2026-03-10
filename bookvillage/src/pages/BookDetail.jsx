@@ -358,7 +358,7 @@ const BookDetail = () => {
                 <BookOpenText size={18} className="text-primary" />
                 도서 소개
               </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">{synopsis}</p>
+              <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: synopsis }}></p>
             </div>
           )}
 
