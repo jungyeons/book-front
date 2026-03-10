@@ -204,9 +204,12 @@ export default function OrderDetail() {
               </div>
             </div>
             {order.receiptFilePath && (
-              <a className="mt-3 inline-flex text-sm font-semibold text-primary hover:underline" href={api.orders.downloadUrl(order.receiptFilePath)} target="_blank" rel="noreferrer">
+              <button
+                className="mt-3 inline-flex text-sm font-semibold text-primary hover:underline"
+                onClick={() => api.orders.downloadReceipt(order.receiptFilePath)}
+              >
                 {TEXT.receipt}
-              </a>
+              </button>
             )}
           </section>
 

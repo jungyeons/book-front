@@ -175,7 +175,25 @@ export const api = {
     checkout: (payload) => request("/orders/checkout", { method: "POST", body: JSON.stringify(payload) }),
     lookup: (orderNumber) => request(`/orders/lookup?orderNumber=${encodeURIComponent(orderNumber)}`),
     track: (orderId, trackingUrl) => request(`/orders/${orderId}/tracking?trackingUrl=${encodeURIComponent(trackingUrl)}`),
-    downloadUrl: (file) => `${API_BASE}/download?file=${encodeURIComponent(file)}`,
+    downloadReceipt: async (file) => {
+      const res = await fetch(`${API_BASE}/download?file=${encodeURIComponent(file)}`, {
+        headers: { ...getAuthHeader() },
+      });
+      if (res.status === 401) {
+        clearAuthSession();
+        throw new ApiError(statusMessage(401), { status: 401 });
+      }
+      if (!res.ok) throw new ApiError("영수증 다운로드에 실패했습니다.", { status: res.status });
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = file.split("/").pop() || "receipt.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    },
   },
   reviews: {
     listByBook: (bookId) => request(`/books/${bookId}/reviews`),

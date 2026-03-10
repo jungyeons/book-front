@@ -116,14 +116,12 @@ export default function Orders() {
                   </Link>
                 )}
                 {order.receiptFilePath && (
-                  <a
+                  <button
                     className="font-semibold text-primary hover:underline"
-                    href={api.orders.downloadUrl(order.receiptFilePath)}
-                    target="_blank"
-                    rel="noreferrer"
+                    onClick={() => api.orders.downloadReceipt(order.receiptFilePath)}
                   >
                     {TEXT.receipt}
-                  </a>
+                  </button>
                 )}
               </div>
 
