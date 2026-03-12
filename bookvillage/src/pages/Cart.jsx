@@ -56,6 +56,7 @@ export default function Cart() {
   const [usePoints, setUsePoints] = useState(0);
   const [shippingAddress, setShippingAddress] = useState("");
 
+
   const coupons = useMemo(() => (wallet?.coupons || []).filter((c) => toSafeNumber(c.remainingCount, 0) > 0), [wallet]);
   const selectedCoupon = useMemo(() => coupons.find((c) => c.code === selectedCouponCode) || null, [coupons, selectedCouponCode]);
 
@@ -326,14 +327,13 @@ export default function Cart() {
                   <input
                     type="number"
                     min={0}
-                    max={Math.min(availablePoints, maxPointsByAmount)}
                     className="w-full rounded-xl border border-input bg-background px-3 py-2 text-sm"
                     value={usePoints}
                     onChange={(e) => setUsePoints(toSafeNumber(e.target.value, 0))}
                   />
                   <p className="mt-1 text-xs text-muted-foreground">
                     {"\uCD5C\uB300 "}
-                    {Math.min(availablePoints, maxPointsByAmount).toLocaleString()}p
+                    {availablePoints.toLocaleString()}p
                     {" \uC0AC\uC6A9 \uAC00\uB2A5"}
                   </p>
                 </label>

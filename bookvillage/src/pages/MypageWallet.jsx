@@ -148,7 +148,6 @@ export default function MypageWallet() {
           </div>
         </div>
 
-        {/* 포인트 충전 (파라미터 변조 실습) */}
         <section className="rounded-2xl border border-border bg-card p-5">
           <div className="mb-3 flex items-center gap-2">
             <Zap size={16} />
@@ -156,11 +155,11 @@ export default function MypageWallet() {
           </div>
           <form onSubmit={handleCharge} className="flex items-end gap-3">
             <div className="flex-1">
-              <label className="mb-1 block text-xs text-muted-foreground">충전 금액 (음수 입력 시 차감됨)</label>
+              <label className="mb-1 block text-xs text-muted-foreground">충전 금액 (P)</label>
               <input
                 type="number"
                 className="w-full rounded-xl border border-input bg-background px-3 py-2 text-sm"
-                placeholder="예: 10000 또는 -5000"
+                placeholder="충전할 포인트를 입력하세요"
                 value={chargeAmount}
                 onChange={(e) => setChargeAmount(e.target.value)}
               />
@@ -179,8 +178,8 @@ export default function MypageWallet() {
           {chargeResult && (
             <div className="mt-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-700">
               <p>충전 전: {Number(chargeResult.balanceBefore).toLocaleString()}P</p>
-              <p>변경 금액: {Number(chargeResult.charged) > 0 ? "+" : ""}{Number(chargeResult.charged).toLocaleString()}P</p>
-              <p className="font-bold">충전 후: {Number(chargeResult.balanceAfter).toLocaleString()}P</p>
+              <p>충전 금액: +{Number(chargeResult.charged).toLocaleString()}P</p>
+              <p className="font-bold">현재 포인트: {Number(chargeResult.balanceAfter).toLocaleString()}P</p>
             </div>
           )}
         </section>
