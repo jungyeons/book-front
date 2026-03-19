@@ -199,13 +199,12 @@ export default function CustomerService() {
                     <div className="mt-5 flex items-center gap-2 rounded-xl border border-border bg-secondary/40 px-4 py-3">
                       <Paperclip size={14} className="shrink-0 text-muted-foreground" />
                       <div className="min-w-0 flex-1">
-                        <p className="text-xs text-muted-foreground">첨부파일</p>
                         <a
                           href={selectedNotice.attachmentUrl}
-                          download={selectedNotice.attachmentName || true}
+                          download
                           className="break-all text-sm font-semibold text-primary underline hover:opacity-80"
                         >
-                          {selectedNotice.attachmentName || selectedNotice.attachmentUrl}
+                          첨부파일
                         </a>
                       </div>
                     </div>
