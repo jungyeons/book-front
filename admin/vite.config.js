@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd(), "");
     const base = env.VITE_APP_BASE_PATH || (mode === "production" ? "/admin/" : "/");
+    const backendTarget = env.VITE_BACKEND_TARGET || "http://localhost:8080";
 
     return {
         base,
@@ -20,15 +21,15 @@ export default defineConfig(({ mode }) => {
             },
             proxy: {
                 "/admin/api": {
-                    target: "http://localhost:18081",
+                    target: backendTarget,
                     changeOrigin: true,
                 },
                 "/product-images": {
-                    target: "http://localhost:18081",
+                    target: backendTarget,
                     changeOrigin: true,
                 },
                 "/api": {
-                    target: "http://localhost:18081",
+                    target: backendTarget,
                     changeOrigin: true,
                 },
             },

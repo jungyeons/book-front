@@ -8,9 +8,6 @@ server {
     server_tokens on;
     client_max_body_size 50M;
 
-    # Docker 내부 DNS (127.0.0.11) - 컨테이너 이름 및 EC2 IP 모두 리졸브 가능
-    resolver 127.0.0.11 ipv6=off valid=10s;
-
     # Uploads proxy - directory listing enabled
     location /uploads/ {
         set $bv_backend ${BV_BACKEND_HOST}:${BV_BACKEND_PORT};
